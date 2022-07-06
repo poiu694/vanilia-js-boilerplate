@@ -1,3 +1,5 @@
+import SamplePage from './pages/SamplePage.js';
+
 export default class App {
   constructor($target) {
     this.$target = $target;
@@ -10,6 +12,8 @@ export default class App {
   }
 
   render() {
-    this.$target.innerHTML = '<h2>hi</h2>';
+    new SamplePage(this.$target, {
+      testData: ['1', '2', '3', '4', '5'], 
+    })
   }
 }
