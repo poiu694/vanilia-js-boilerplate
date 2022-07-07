@@ -1,4 +1,4 @@
-import SamplePage from './pages/SamplePage.js';
+import Router from './utils/router.js';
 
 export default class App {
   constructor($target) {
@@ -8,12 +8,11 @@ export default class App {
   }
 
   init() {
+    this.router = new Router(this.$target);
     this.render();
   }
 
   render() {
-    new SamplePage(this.$target, {
-      testData: ['1', '2', '3', '4', '5'], 
-    })
+    this.router.switchRenderPage();
   }
 }

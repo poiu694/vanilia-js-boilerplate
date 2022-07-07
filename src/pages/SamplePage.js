@@ -3,11 +3,12 @@ import SampleComponent from '../components/SampleComponent.js';
 
 export default class SamplePage extends BaseComponent {
   componentWillReciveProps() {
-    const { testData } = this.props;
+    const { testData, movePage } = this.props;
 
     this.state = {
       data: testData,
-    }
+      movePage: movePage,
+    };
   }
 
   template() {
@@ -28,7 +29,7 @@ export default class SamplePage extends BaseComponent {
   }
 
   render() {
-    const { data } = this.state;
+    const { data, movePage } = this.state;
 
     if (Array.isArray(data) && data.length === 0) {
       alert('데이터가 유효하지 않습니다.');
@@ -37,9 +38,9 @@ export default class SamplePage extends BaseComponent {
 
       this.selectDOMBeforeRender();
       new SampleComponent(this.$title, {
-        title: 'Test Title'
+        title: 'Test Title',
+        movePage,
       })
-
     }
   }
 }
