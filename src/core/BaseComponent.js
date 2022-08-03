@@ -14,6 +14,7 @@ export default class BaseComponent {
 
   init() {
     this.render();
+    this.componentDidMount();
   }
 
   template() {
@@ -21,7 +22,7 @@ export default class BaseComponent {
   }
 
   componentWillReciveProps() {}
-  
+
   componentDidMount() {}
 
   componentDidUpdate() {}
@@ -31,21 +32,24 @@ export default class BaseComponent {
   setState(newState) {
     const nextState = { ...this.state, ...newState };
 
+    if (isDuplicateUpdate(this.state, nextState)) return;
     this.state = nextState;
 
+    this.render();
     this.componentDidUpdate();
   }
 
-  selectDOMBeforeRender() {}
+  selectDOM() {}
 
   setEvent() {}
 
   render() {
     this.$target.innerHTML = this.template();
-
-    this.selectDOMBeforeRender();
+    this.selectDOM();
     this.setEvent();
-
-    this.componentDidMount();
   }
+}
+
+function isDuplicateUpdate(obejctA, obejctB) {
+  return JSON.stringify(obejctA) === JSON.stringify(obejctB);
 }
